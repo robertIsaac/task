@@ -1,0 +1,62 @@
+<h1>add new user</h1>
+<form
+  #newUserForm="ngForm"
+  (ngSubmit)="addUser(newUserForm)">
+  <label>
+    <span>name</span>
+    <input type="text" name="name" ngModel required>
+  </label>
+  <label>
+    <span>email</span>
+    <input type="email" name="email" ngModel required>
+  </label>
+  <label>
+    <span>password</span>
+    <input type="password" name="password" ngModel required>
+  </label>
+  <label>
+    <span>permission</span>
+    <select name="permission" ngModel required>
+      <option value="0">deactivate</option>
+      <option value="16" selected>normal</option>
+      <option value="32">manager</option>
+      <option value="48">admin</option>
+      <option value="64">owner</option>
+    </select>
+  </label>
+  <input type="submit" [disabled]="!newUserForm.form.valid">
+</form>
+<h1>edit user</h1>
+<form
+  #editUserForm="ngForm"
+  (ngSubmit)="editUser(editUserForm)">
+  <label>
+    <span>name</span>
+    <select name="id" (change)="changePermission(editUserForm.value.id);" ngModel required>
+      <option *ngFor="let user of users" [value]="user.id">{{user.name}}</option>
+    </select>
+  </label>
+  <label>
+    <span>password</span>
+    <input type="password" name="password" ngModel>
+    <span>leave blank if not wish to change</span>
+  </label>
+  <label>
+    <span>permission</span>
+    <select name="permission" [(ngModel)]="editUserPermission" required>
+      <option value="0">deactivate</option>
+      <option value="16" selected>normal</option>
+      <option value="32">manager</option>
+      <option value="48">admin</option>
+      <option value="64">owner</option>
+    </select>
+  </label>
+  <input type="submit" [disabled]="!editUserForm.form.valid">
+</form>
+<h3>permissions</h3>
+<ul>
+  <li>normal user > read only tasks</li>
+  <li>manager > edit and add new tasks</li>
+  <li>admin > add new inputs to a task</li>
+  <li>owner > add new users, change password and permissions for users</li>
+</ul>

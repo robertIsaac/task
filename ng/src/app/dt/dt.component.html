@@ -1,0 +1,21 @@
+<table id="example" class="table-condensed nowrap table table-bordered row-border hover">
+  <thead>
+  <tr>
+    <th>id</th>
+    <th *ngFor="let input of inputs">{{input.name}}</th>
+    <th>created by</th>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let row of tasks">
+    <tr>
+      <td>{{row.id}}</td>
+      <ng-container *ngFor="let task of row.tasks">
+        <td *ngIf="inputService.types[task.input.type] != 'select'">{{task.value}}</td>
+        <td *ngIf="inputService.types[task.input.type] == 'select'">{{task.option.name}}</td>
+      </ng-container>
+      <td>{{row.user.name}}</td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>

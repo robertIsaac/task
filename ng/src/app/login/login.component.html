@@ -1,0 +1,18 @@
+<form [formGroup]="form" autocomplete="off">
+  <fieldset>
+    <legend>Login</legend>
+    <div class="form-field">
+      <label>Email:</label>
+      <input name="email" formControlName="email" value="german.lemke@metz.com">
+    </div>
+    <div class="form-field">
+      <label>Password:</label>
+      <input name="password" formControlName="password" value="12345"
+             type="password">
+    </div>
+  </fieldset>
+  <div class="form-buttons">
+    <button class="button button-primary"
+            (click)="login()">Login</button>
+  </div>
+</form>
