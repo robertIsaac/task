@@ -40,6 +40,7 @@ class Input extends Controller
         $input->save();
         $inputId = $input->id;
         $options = [];
+        $optionId = null;
         if (TYPES[$request->type] == 'select') {
             foreach ($request->input('options.*.name') as $value) {
                 $option = new App\Option();
@@ -48,11 +49,29 @@ class Input extends Controller
                 $option->user_id = $request->auth->id;
                 $option->save();
                 $options[] = $option->id;
+                if ($request->value == $option->name) {
+                    $optionId = $option->id;
+                }
             }
+            $value = null;
+        } else {
+            $value = $request->value;
         }
+        $this->adjustOldTasks($inputId, $optionId, $value);
         return [
             'id' => $inputId,
             'optionsId' => $options
         ];
+    }
+
+    private function adjustOldTasks($inputId, $optionId ,$value) {
+        foreach (App\Row::all() as $row) {
+            $task = new App\Task();
+            $task->row_id = $row->id;
+            $task->input_id = $inputId;
+            $task->option_id = $optionId;
+            $task->value = $value;
+            $task->save();
+        }
     }
 }

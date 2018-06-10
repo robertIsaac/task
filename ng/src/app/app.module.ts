@@ -18,6 +18,7 @@ import { TaskService } from './task.service';
 import { InputService } from './input.service';
 import { AuthService } from './auth.service';
 import { UserService } from './user.service';
+import { EditTaskComponent } from './edit-task/edit-task.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { UserService } from './user.service';
     NavbarComponent,
     InsertInputComponent,
     LoginComponent,
-    UserManagerComponent
+    UserManagerComponent,
+    EditTaskComponent
   ],
   imports: [
     BrowserModule,

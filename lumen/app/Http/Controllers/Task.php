@@ -18,7 +18,14 @@ class Task extends Controller
                 'error' => 'forbidden.'
             ], 403);
         }
-        return App\Row::with(['user', 'tasks', 'tasks.option', 'tasks.input'])->orderBy('rows.id', 'ASC', 'order', 'ASC')->get();
+        return App\Row::with([
+            'user',
+            'tasks',
+            'tasks.option',
+            'tasks.input'
+            ])
+            ->orderBy('rows.id', 'ASC')
+            ->get();
     }
 
     function addTask(Request $request) {
@@ -49,7 +56,15 @@ class Task extends Controller
         return ['id' => $rowId];
     }
 
-    function editTask() {
-//        not done yet
+    function editTask(Request $request) {
+        $row = App\Row::find($request->id)->with('tasks', 'tasks.input')->get();
+        foreach ($row[0]->tasks as $task) {
+            if (TYPES[$task->input->type] == 'select') {
+                $task->option_id = $request[$task->input->id];
+            } else {
+                $task->value = $request[$task->input->id];
+            }
+            $task->save();
+        }
     }
 }

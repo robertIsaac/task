@@ -3,7 +3,7 @@
   (ngSubmit)="insertTask(taskForm)" >
   <label *ngFor="let column of columns">
     <span>{{column.name}}</span>
-    <input *ngIf="types[column.type] != 'select'" [type]="types[column.type]"  [name]="column.id" [value]="column.value" [required]="column.required == '1'" ngModel>
+    <input *ngIf="types[column.type] != 'select'" [type]="types[column.type]" [name]="column.id" [required]="column.required == '1'" [ngModel]="column.value">
     <select *ngIf="types[column.type] == 'select'" [name]="column.id" [value]="column.value" ngModel>
       <option *ngFor="let option of column.options" [value]="option.id">{{option.name}}</option>
     </select>

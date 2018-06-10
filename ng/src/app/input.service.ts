@@ -24,11 +24,11 @@ export class InputService {
 
   addInput(newInput: { name: String; type: number; value: any; required: boolean; order: number; options: any}) {
     const data = $.param(newInput);
-    this.http.post(`${this.authService.apiRoot}addInput`, data, this.authService.postHttpOptions).subscribe(authResult => {
-      newInput['id'] = authResult['id'];
+    this.http.post(`${this.authService.apiRoot}addInput`, data, this.authService.postHttpOptions).subscribe(response => {
+      newInput['id'] = response['id'];
       if (this.types[newInput.type] === 'select') {
         for (let i = 0; i < newInput['options'].length; i++) {
-          newInput['options'][i]['id'] = authResult['optionsId'][i];
+          newInput['options'][i]['id'] = response['optionsId'][i];
         }
       }
       const inputs = this.inputs.getValue();

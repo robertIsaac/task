@@ -51,7 +51,11 @@ export class DtComponent implements OnInit {
     this.taskService.tasks.subscribe(tasks => {
       this.tasks = tasks;
     });
+
   }
 
+  editRow(rowId) {
+    this.router.navigate(['editTask', rowId]);
+  }
 
 }

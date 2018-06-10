@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {DtComponent} from './dt/dt.component';
-import {InsertTaskComponent} from './insert-task/insert-task.component';
-import {InsertInputComponent} from './insert-input/insert-input.component';
-import {LoginComponent} from './login/login.component';
-import {UserManagerComponent} from './user-manager/user-manager.component';
+
+import { DtComponent } from './dt/dt.component';
+import { InsertTaskComponent } from './insert-task/insert-task.component';
+import { EditTaskComponent } from './edit-task/edit-task.component';
+import { InsertInputComponent } from './insert-input/insert-input.component';
+import { LoginComponent } from './login/login.component';
+import { UserManagerComponent } from './user-manager/user-manager.component';
 
 const routes: Routes = [
   {
@@ -19,6 +21,9 @@ const routes: Routes = [
   {
     path: 'insertTask',
     component: InsertTaskComponent
+  },{
+    path: 'editTask/:id',
+    component: EditTaskComponent
   },
   {
     path: 'insertOption',

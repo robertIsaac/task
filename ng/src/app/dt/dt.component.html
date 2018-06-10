@@ -4,6 +4,8 @@
     <th>id</th>
     <th *ngFor="let input of inputs">{{input.name}}</th>
     <th>created by</th>
+    <th>created at</th>
+    <th>edit</th>
   </tr>
   </thead>
   <tbody>
@@ -15,6 +17,8 @@
         <td *ngIf="inputService.types[task.input.type] == 'select'">{{task.option.name}}</td>
       </ng-container>
       <td>{{row.user.name}}</td>
+      <td>{{row.created_at}}</td>
+      <td (click)="editRow(row.id)">edit</td>
     </tr>
   </ng-container>
   </tbody>

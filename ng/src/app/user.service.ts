@@ -15,8 +15,8 @@ export class UserService {
 
   addUser(newUser: any) {
     const data = $.param(newUser);
-    this.http.post(`${this.authService.apiRoot}addUser`, data, this.authService.postHttpOptions).subscribe(authResult => {
-      newUser['id'] = authResult['id'];
+    this.http.post(`${this.authService.apiRoot}addUser`, data, this.authService.postHttpOptions).subscribe(response => {
+      newUser['id'] = response['id'];
       const users = this.users.getValue();
       users[users.length] = newUser;
       this.users.next(users);
@@ -26,7 +26,7 @@ export class UserService {
   editUser(user: any) {
     const data = $.param(user);
     const userId = parseInt(user.id, 10);
-    this.http.post(`${this.authService.apiRoot}editUser`, data, this.authService.postHttpOptions).subscribe(authResult => {
+    this.http.post(`${this.authService.apiRoot}editUser`, data, this.authService.postHttpOptions).subscribe(response => {
       const users = this.users.getValue();
       const i = users.map(function(user) {
         return user.id;

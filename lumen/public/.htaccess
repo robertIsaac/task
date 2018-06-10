@@ -22,4 +22,4 @@
 
 Header add Access-Control-Allow-Origin "http://localhost:4200"
 Header add Access-Control-Allow-Methods "GET, PUT, POST, DELETE, HEAD"
-Header add Access-Control-Allow-Headers "Authorization"
+Header add Access-Control-Allow-Headers "Authorization, responseType"

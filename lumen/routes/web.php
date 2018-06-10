@@ -36,6 +36,10 @@ $router->group(
                     'middleware' => 'task',
                     'uses' => 'Task@addTask'
                 ]);
+                $router->post('editTask', [
+                    'middleware' => 'task',
+                    'uses' => 'Task@editTask'
+                ]);
                 $router->get('getInputs', [
                     'uses' => 'Input@getInputs'
                 ]);
@@ -66,10 +70,16 @@ $router->group(
 //    ]
 //);
 
-$router->get('ng/{params?}', [
-    'where' => ['params', '(.*)'],
+$router->get('ng/{all:.*}', [
+//    'where' => ['params', '(.*)'],
     function () {
 //    return view('welcome');
-    include_once '../ng/public/index.html';
+    include_once dirname(__DIR__) . '\public\ng\index.html';
 }]
 );
+
+$router->options('{all:.*}', [
+    function() {
+        return response('');
+    }
+]);

@@ -10,6 +10,7 @@ class JwtMiddleware
 {
     public function handle($request, Closure $next, $guard = null)
     {
+//        return $next($request);
         $token = $request->bearerToken();
 // if token sent by get not header
 //        $token = $request->get('token');
