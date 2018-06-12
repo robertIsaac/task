@@ -17,7 +17,7 @@ class Row extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->timestamps();
-
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

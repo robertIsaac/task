@@ -58,4 +58,8 @@ export class DtComponent implements OnInit {
     this.router.navigate(['editTask', rowId]);
   }
 
+  deleteRow(rowId) {
+    this.taskService.deleteTask(rowId);
+  }
+
 }

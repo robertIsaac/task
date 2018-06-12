@@ -6,6 +6,7 @@
     <th>created by</th>
     <th>created at</th>
     <th>edit</th>
+    <th>delete</th>
   </tr>
   </thead>
   <tbody>
@@ -19,6 +20,7 @@
       <td>{{row.user.name}}</td>
       <td>{{row.created_at}}</td>
       <td (click)="editRow(row.id)">edit</td>
+      <td (click)="deleteRow(row.id)">delete</td>
     </tr>
   </ng-container>
   </tbody>

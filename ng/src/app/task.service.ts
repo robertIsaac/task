@@ -72,4 +72,16 @@ export class TaskService {
       this.tasks.next(tasks);
     });
   }
+
+  deleteTask(rowId: any) {
+    const data = $.param({rowId: rowId});
+    this.http.post(`${this.authService.apiRoot}deleteTask`, data, this.authService.postHttpOptions).subscribe(response => {
+      const tasks = this.tasks.getValue();
+      const index = tasks.map(function(task) {
+        return task.id;
+      }).indexOf(rowId);
+      tasks.pop(index);
+      this.tasks.next(tasks);
+    });
+  }
 }

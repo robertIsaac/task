@@ -67,4 +67,9 @@ class Task extends Controller
             $task->save();
         }
     }
+
+    function deleteTask(Request $request) {
+        APP\Row::destroy($request->rowId);
+        return 'true';
+    }
 }

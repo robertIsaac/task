@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 01, 2018 at 07:14 PM
+-- Generation Time: Jun 12, 2018 at 04:47 PM
 -- Server version: 5.7.21-log
 -- PHP Version: 7.2.3
 
@@ -57,11 +57,11 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(16, '2018_05_18_001755_create_users_table', 1),
-(17, '2018_05_24_134748_input', 1),
-(18, '2018_05_24_134816_option', 1),
-(19, '2018_05_24_134830_row', 1),
-(20, '2018_05_24_134841_task', 1);
+(36, '2018_05_18_001755_create_users_table', 1),
+(37, '2018_05_24_134748_input', 1),
+(38, '2018_05_24_134816_option', 1),
+(39, '2018_05_24_134830_row', 1),
+(40, '2018_05_24_134841_task', 1);
 
 -- --------------------------------------------------------
 
@@ -88,7 +88,8 @@ CREATE TABLE `rows` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -126,7 +127,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `permission`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@local.host', '$2y$10$9DS61vaCsHUofavgYlMCvOl9YwWM0igBsViVw.QVOIJ5h/jPOer3W', 64, '2018-06-01 17:13:04', '2018-06-01 17:13:04');
+(1, 'admin', 'admin@local.host', '$2y$10$9DS61vaCsHUofavgYlMCvOl9YwWM0igBsViVw.QVOIJ5h/jPOer3W', 64, '2018-06-01 15:13:04', '2018-06-01 15:13:04');
 
 --
 -- Indexes for dumped tables
@@ -191,7 +192,7 @@ ALTER TABLE `inputs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `options`

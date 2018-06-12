@@ -40,6 +40,10 @@ $router->group(
                     'middleware' => 'task',
                     'uses' => 'Task@editTask'
                 ]);
+                $router->post('deleteTask', [
+                    'middleware' => 'task',
+                    'uses' => 'Task@deleteTask'
+                ]);
                 $router->get('getInputs', [
                     'uses' => 'Input@getInputs'
                 ]);
@@ -69,7 +73,11 @@ $router->group(
 //        }
 //    ]
 //);
-
+$router->get('', [
+        function () {
+            return redirect('ng');
+        }]
+);
 $router->get('ng/{all:.*}', [
 //    'where' => ['params', '(.*)'],
     function () {
