@@ -73,11 +73,11 @@ $router->group(
 //        }
 //    ]
 //);
-//$router->get('', [
-//        function () {
-//            return redirect('ng');
-//        }]
-//);
+$router->get('', [
+        function () {
+            return redirect('ng');
+        }]
+);
 $router->get('ng/{all:.*}', [
 //    'where' => ['params', '(.*)'],
     function () {
