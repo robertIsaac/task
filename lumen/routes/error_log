@@ -1,1 +1,0 @@
-[10-Jun-2018 16:25:46 America/Chicago] PHP Parse error:  syntax error, unexpected 'class' (T_CLASS), expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in /home3/globalserv/task-manager.robert-isaac.ml/bootstrap/app.php on line 42
