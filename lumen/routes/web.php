@@ -73,16 +73,16 @@ $router->group(
 //        }
 //    ]
 //);
-$router->get('', [
-        function () {
-            return redirect('ng');
-        }]
-);
+//$router->get('', [
+//        function () {
+//            return redirect('ng');
+//        }]
+//);
 $router->get('ng/{all:.*}', [
 //    'where' => ['params', '(.*)'],
     function () {
-//    return view('welcome');
-    include_once dirname(__DIR__) . '\public\ng\index.html';
+        $ng = dirname(__DIR__) . '/public/ng/index.html';
+        include_once $ng;
 }]
 );
 
