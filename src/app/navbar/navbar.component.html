@@ -1,0 +1,10 @@
+<nav>
+  <ul>
+    <li *ngIf="authService.isLoggedIn()"><a routerLink="tasks">tasks</a></li>
+    <li *ngIf="authService.isLoggedIn() && authService.havePermission(32)"><a routerLink="insertTask">insert task</a></li>
+    <li *ngIf="authService.isLoggedIn() && authService.havePermission(48)"><a routerLink="insertOption">insert column</a></li>
+    <li *ngIf="authService.isLoggedIn() && authService.havePermission(64)"><a routerLink="userManager">user manager</a></li>
+    <li *ngIf="authService.isLoggedIn()"><a (click)="logout()">logout</a></li>
+    <li *ngIf="authService.isLoggedOut()"><a routerLink="login">login</a></li>
+  </ul>
+</nav>

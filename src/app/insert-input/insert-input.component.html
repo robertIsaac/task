@@ -1,0 +1,77 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label>
+    <span>name</span>
+    <input type="text" name="name" required formControlName="name">
+    <span class="error" *ngIf="form.controls.name.errors">{{form.controls.name.errors.error}}</span>
+  </label>
+
+  <label>
+    <span>type</span>
+    <select name="type" required formControlName="type" (change)="onTypeChange()">
+      <option *ngFor="let type of types; let i = index" [value]="i">{{type}}</option>
+      <!--<option value="1">select</option>-->
+      <!--<option value="2">text</option>-->
+      <!--<option value="3">Checkbox</option>-->
+      <!--<option value="4">date</option>-->
+      <!--<option value="5">time</option>-->
+      <!--<option value="6">datetime-local</option>-->
+      <!--<option value="7">number</option>-->
+    </select>
+  </label>
+
+  <fieldset formArrayName="options" *ngIf="form.controls.type.value == 1">
+    <div *ngFor="let option of form.controls.options.controls; let i = index">
+      <span [formGroupName]="i">
+        <label>
+          <span>option {{i + 1}}</span>
+          <input type="text" name="name" formControlName="name">
+          <span *ngIf="form.controls.options.controls.length > 2" (click)="removeOption(i)">×</span>
+        </label>
+      </span>
+    </div>
+    <button type="button" (click)="addOption()">add new option</button>
+  </fieldset>
+
+  <label>
+    <span>default value</span>
+    <input type="text" name="value" formControlName="value">
+  </label>
+
+  <!--<fieldset formArrayName="attributes">-->
+    <!--<div *ngFor="let attribute of form.controls.attributes.controls; let i = index">-->
+      <!--<span [formGroupName]="i">-->
+        <!--<label>-->
+          <!--<span>attribute {{i + 1}} name</span>-->
+          <!--<input formControlName="attributeName">-->
+        <!--</label>-->
+        <!--<label>-->
+          <!--<span>attribute {{i + 1}} value</span>-->
+          <!--<input formControlName="attributeValue">-->
+          <!--<span (click)="removeAttribute(i)">×</span>-->
+        <!--</label>-->
+      <!--</span>-->
+    <!--</div>-->
+    <!--<button type="button" (click)="addAttribute()">add attribute</button>-->
+  <!--</fieldset>-->
+  <label>
+    <span>required</span>
+    <input type="checkbox" formControlName="required">
+  </label>
+
+  <label>
+    <span>insert</span>
+    <select name="order" required formControlName="order">
+      <option value="0">first option</option>
+      <ng-container *ngFor="let option of inputs; let last = last">
+        <option [ngValue]="option.order" *ngIf="!last">after {{option.name}}</option>
+      </ng-container>
+      <option value="-1" selected>last option</option>
+    </select>
+  </label>
+
+  <input type="submit" [disabled]="!form.valid">
+</form>
+
+<!--<ng-container *ngFor="let option of inputs; let last = last">-->
+<!--<div>{{option.name}} - {{option.order}}</div>-->
+<!--</ng-container>-->
