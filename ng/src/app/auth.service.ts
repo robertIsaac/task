@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class AuthService {
-  apiRoot : string;
+  apiRoot: string;
   postHttpOptions;
   getHttpOptions;
   private permission: number;
@@ -24,7 +24,8 @@ export class AuthService {
           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         })
       };
-      const data = $.param({email: email, password: password});
+      // const data = $.param();
+      const data = this.encode_body({email: email, password: password});
       this.http.post(`${this.apiRoot}auth/login`, data, httpOptions).subscribe(authResult => {
         if (this.setSession(authResult)) {
           resolve();
@@ -112,5 +113,9 @@ export class AuthService {
 
   havePermission(pagePermission) {
     return pagePermission <= this.permission;
+  }
+
+  encode_body(data) {
+    return new URLSearchParams(data).toString();
   }
 }

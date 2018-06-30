@@ -2,61 +2,73 @@
 <form
   #newUserForm="ngForm"
   (ngSubmit)="addUser(newUserForm)">
-  <label>
-    <span>name</span>
-    <input type="text" name="name" ngModel required>
-  </label>
-  <label>
-    <span>email</span>
-    <input type="email" name="email" ngModel required>
-  </label>
-  <label>
-    <span>password</span>
-    <input type="password" name="password" ngModel required>
-  </label>
-  <label>
-    <span>permission</span>
-    <select name="permission" ngModel required>
+
+  <div class="form-label-group">
+    <input id="name" type="text" name="name" ngModel required class="form-control" placeholder="Name" autofocus>
+    <label for="name">Name</label>
+  </div>
+
+  <div class="form-label-group">
+    <input type="email" name="email" ngModel required class="form-control" placeholder="Email" id="email">
+    <label for="email">Email</label>
+  </div>
+
+  <div class="form-label-group">
+    <input type="password" name="password" ngModel required class="form-control" placeholder="Password" id="password">
+    <label for="email">password</label>
+  </div>
+
+  <div class="form-label-group">
+    <select name="permission" ngModel required class="form-control">
+      <option value="">Permission</option>
       <option value="0">deactivate</option>
       <option value="16" selected>normal</option>
       <option value="32">manager</option>
       <option value="48">admin</option>
       <option value="64">owner</option>
     </select>
-  </label>
-  <input type="submit" [disabled]="!newUserForm.form.valid">
+  </div>
+
+  <div class="form-label-group">
+  <input type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="!newUserForm.form.valid">
+  </div>
+
 </form>
 <h1>edit user</h1>
 <form
   #editUserForm="ngForm"
   (ngSubmit)="editUser(editUserForm)">
-  <label>
-    <span>name</span>
-    <select name="id" (change)="changePermission(editUserForm.value.id);" ngModel required>
+
+  <div class="form-label-group">
+    <select name="id" (change)="changePermission(editUserForm.value.id);" ngModel required class="form-control">
+      <option value="">user name</option>
       <option *ngFor="let user of users" [value]="user.id">{{user.name}}</option>
     </select>
-  </label>
-  <label>
-    <span>password</span>
-    <input type="password" name="password" ngModel>
-    <span>leave blank if not wish to change</span>
-  </label>
-  <label>
-    <span>permission</span>
-    <select name="permission" [(ngModel)]="editUserPermission" required>
+  </div>
+
+  <div class="form-label-group">
+    <input type="password" name="password" ngModel class="form-control" placeholder="Password" id="editPassword">
+    <label for="editPassword">Password <span class="text-muted">(leave blank if not wish to change)</span></label>
+    <!--<span></span>-->
+  </div>
+
+  <div class="form-label-group">
+    <select name="permission" [(ngModel)]="editUserPermission" required class="form-control">
+      <option value="">Permission</option>
       <option value="0">deactivate</option>
       <option value="16" selected>normal</option>
       <option value="32">manager</option>
       <option value="48">admin</option>
       <option value="64">owner</option>
     </select>
-  </label>
-  <input type="submit" [disabled]="!editUserForm.form.valid">
+  </div>
+  <input type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="!editUserForm.form.valid">
 </form>
+
 <h3>permissions</h3>
-<ul>
-  <li>normal user > read only tasks</li>
-  <li>manager > edit and add new tasks</li>
-  <li>admin > add new inputs to a task</li>
-  <li>owner > add new users, change password and permissions for users</li>
+<ul class="list-group">
+  <li class="list-group-item">normal: read only tasks</li>
+  <li class="list-group-item">manager: edit and add new tasks</li>
+  <li class="list-group-item">admin: add new inputs to a task</li>
+  <li class="list-group-item">owner: add new users, change password and permissions for users</li>
 </ul>

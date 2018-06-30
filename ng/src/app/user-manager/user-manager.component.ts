@@ -9,7 +9,7 @@ import {UserService} from '../user.service';
   styleUrls: ['./user-manager.component.scss']
 })
 export class UserManagerComponent implements OnInit {
-  editUserPermission;
+  editUserPermission = '';
   users: any;
   constructor(
     private authService: AuthService,
@@ -24,10 +24,14 @@ export class UserManagerComponent implements OnInit {
   }
 
   changePermission(userId) {
-    const user = this.users.find(user => {
+    if (userId == '') {
+      this.editUserPermission = '';
+      return;
+    }
+    const selectedUser = this.users.find(user => {
       return user.id == userId;
     });
-    this.editUserPermission = user.permission;
+    this.editUserPermission = selectedUser.permission;
   }
 
   addUser(form) {

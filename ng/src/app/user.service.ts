@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import 'rxjs/add/operator/scan';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+// import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+// import 'rxjs/add/operator/scan';
 
 @Injectable()
 export class UserService {
@@ -14,7 +15,8 @@ export class UserService {
   }
 
   addUser(newUser: any) {
-    const data = $.param(newUser);
+    // const data = $.param(newUser);
+    const data = this.authService.encode_body(newUser);
     this.http.post(`${this.authService.apiRoot}addUser`, data, this.authService.postHttpOptions).subscribe(response => {
       newUser['id'] = response['id'];
       const users = this.users.getValue();
@@ -24,8 +26,9 @@ export class UserService {
   }
 
   editUser(user: any) {
-    const data = $.param(user);
+    // const data = $.param(user);
     const userId = parseInt(user.id, 10);
+    const data = this.authService.encode_body(user);
     this.http.post(`${this.authService.apiRoot}editUser`, data, this.authService.postHttpOptions).subscribe(response => {
       const users = this.users.getValue();
       const i = users.map(function(user) {

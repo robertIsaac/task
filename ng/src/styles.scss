@@ -1,27 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
-html, body{
-  padding: 0;
-  margin: 0;
+html,
+body {
+  min-height: 100%;
 }
 
-form{
-  padding: 20px;
-  label {
-    display: block;
-    margin: 10px;
-    span {
-      min-width: 100px;
-      display: inline-block;
-    }
-    .error {
-      color: red;
-    }
-    input, select {
-      width: 200px;
-    }
-    .ng-invalid.ng-touched{
-      background-color: rgba(255,0,0,0.3);
-      border-color: red;
-    }
-  }
+html{
+  position: relative;
+}
+
+body {
+  //position: static;
+  //display: flex;
+  //align-items: center;
+  padding-top: 75px;
+  padding-bottom: 60px;
+  background-color: #f5f5f5;
+  //margin-bottom: 60px; /* Margin bottom by footer height */
 }

@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Config;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -78,6 +78,15 @@ $router->get('', [
             return redirect('ng');
         }]
 );
+
+$router->get('types', [
+        function () {
+//    var_dump(TYPES);
+//    var_dump(Config('constants'));
+            return TYPES;
+        }]
+);
+
 $router->get('ng/{all:.*}', [
 //    'where' => ['params', '(.*)'],
     function () {

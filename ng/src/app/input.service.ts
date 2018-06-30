@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+// import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AuthService } from './auth.service';
 
 @Injectable()
@@ -17,14 +18,19 @@ export class InputService {
     'number',
   ];
   constructor(private http: HttpClient, private authService: AuthService) {
-    this.http.get(`${this.authService.apiRoot}getInputs`, this.authService.getHttpOptions).subscribe(data => {
-      this.inputs.next(data);
-    });
+    if (this.authService.isLoggedIn()) {
+      this.http.get(`${this.authService.apiRoot}getInputs`, this.authService.getHttpOptions).subscribe(data => {
+        this.inputs.next(data);
+      });
+    }
   }
 
   addInput(newInput: { name: String; type: number; value: any; required: boolean; order: number; options: any}) {
-    const data = $.param(newInput);
-    this.http.post(`${this.authService.apiRoot}addInput`, data, this.authService.postHttpOptions).subscribe(response => {
+    // const tempInput = newInput;
+    // tempInput.options = this.authService.encode_body(newInput.options);
+    // const data = this.authService.encode_body(tempInput);
+    // console.log(data);
+    this.http.post(`${this.authService.apiRoot}addInput`, newInput, this.authService.getHttpOptions).subscribe(response => {
       newInput['id'] = response['id'];
       if (this.types[newInput.type] === 'select') {
         for (let i = 0; i < newInput['options'].length; i++) {

@@ -70,7 +70,7 @@ export class InsertInputComponent implements OnInit {
       options: this.form.controls.options.value,
     };
     this.inputService.addInput(newInput);
-    this.form.reset({order: -1});
+    // this.form.reset({order: -1});
   }
 
   usedName(control) {

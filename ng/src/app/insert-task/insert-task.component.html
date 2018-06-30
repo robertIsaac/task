@@ -1,12 +1,26 @@
 <form
   #taskForm="ngForm"
   (ngSubmit)="insertTask(taskForm)" >
-  <label *ngFor="let column of columns">
-    <span>{{column.name}}</span>
-    <input *ngIf="types[column.type] != 'select'" [type]="types[column.type]" [name]="column.id" [required]="column.required == '1'" [ngModel]="column.value">
-    <select *ngIf="types[column.type] == 'select'" [name]="column.id" [value]="column.value" ngModel>
+  <div class="form-label-group" *ngFor="let column of columns">
+    <input
+      *ngIf="types[column.type] != 'select'"
+      [type]="types[column.type]"
+      [name]="column.id"
+      [required]="column.required == '1'"
+      [ngModel]="column.value"
+      [placeholder]="column.name"
+      [id]="column.name"
+      class="form-control"
+    >
+    <label [for]="column.name" *ngIf="types[column.type] != 'select'">
+      {{column.name}}
+    </label>
+
+    <select *ngIf="types[column.type] == 'select'" [name]="column.id" [value]="column.value" ngModel class="form-control">
+      <option value="">{{column.name}}</option>
       <option *ngFor="let option of column.options" [value]="option.id">{{option.name}}</option>
     </select>
-  </label>
-  <input type="submit" [disabled]="!taskForm.form.valid">
+
+  </div>
+  <input type="submit" [disabled]="!taskForm.form.valid" class="btn btn-lg btn-primary btn-block">
 </form>
