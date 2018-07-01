@@ -8,8 +8,8 @@ export class AuthService {
   getHttpOptions;
   private permission: number;
   constructor(private http: HttpClient) {
-    // this.apiRoot = `${window.location.origin}/api/`;
-    this.apiRoot = `http://localhost:8000/api/`;
+    this.apiRoot = `${window.location.origin}/api/`;
+    // this.apiRoot = `http://localhost:8000/api/`;
     if (this.isLoggedIn()) {
       this.setHeaders();
     }
