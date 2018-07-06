@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../auth.service';
-import {Router} from '@angular/router';
-import {InputService} from '../input.service';
-import {TaskService} from '../task.service';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+import { InputService } from '../input.service';
+import { TaskService } from '../task.service';
 
 @Component({
   selector: 'app-tasks',
@@ -31,6 +31,7 @@ export class TasksComponent implements OnInit {
     });
     this.taskService.tasks.subscribe(tasks => {
       this.tasks = tasks;
+      console.log(tasks);
     });
 
   }

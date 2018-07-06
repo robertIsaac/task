@@ -3,26 +3,26 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 // import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AuthService } from './auth.service';
+import {TaskService} from "./task.service";
+import {ShareDataService} from "./share-data.service";
 
 @Injectable()
 export class InputService {
 
   inputs = new BehaviorSubject<any>([]);
-  public types = [
-    'text',
-    'select',
-    'checkbox',
-    'date',
-    'time',
-    'datetime-local',
-    'number',
-  ];
-  constructor(private http: HttpClient, private authService: AuthService) {
+  public types;
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private shareDataService: ShareDataService,
+    private taskService: TaskService,
+  ) {
     if (this.authService.isLoggedIn()) {
       this.http.get(`${this.authService.apiRoot}getInputs`, this.authService.getHttpOptions).subscribe(data => {
         this.inputs.next(data);
       });
     }
+    this.types = this.shareDataService.types;
   }
 
   addInput(newInput: { name: String; type: number; value: any; required: boolean; order: number; options: any}) {
@@ -49,6 +49,7 @@ export class InputService {
         }
       });
       this.inputs.next(inputs);
+      this.taskService.adjustNewInput(newInput);
     });
   }
 }

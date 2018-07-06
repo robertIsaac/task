@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 // import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AuthService } from './auth.service';
-import {InputService} from './input.service';
+import {ShareDataService} from "./share-data.service";
 
 @Injectable()
 export class TaskService {
@@ -11,7 +11,7 @@ export class TaskService {
   constructor(
     private http: HttpClient,
     private authService: AuthService,
-    private inputService: InputService
+    private shareDataService: ShareDataService
   ) {
     if (this.authService.isLoggedIn()) {
       this.http.get(`${this.authService.apiRoot}getTasks`, this.authService.getHttpOptions).subscribe(response => {
@@ -34,7 +34,7 @@ export class TaskService {
       addTask['id'] = response['id'];
       const now = new Date();
       addTask['created_at'] =
-        `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
+        `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} `
         + `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
       addTask['user'] = {};
       addTask['user']['name'] = localStorage.getItem('name');
@@ -70,7 +70,7 @@ export class TaskService {
       }).indexOf(rowId);
       const keys = Object.keys(tasks[index].tasks);
       for (const key of keys) {
-        if (this.inputService.types[tasks[index].tasks[key].input.type] == 'select') {
+        if (this.shareDataService.types[tasks[index].tasks[key].input.type] == 'select') {
           tasks[index].tasks[key]['option_id'] = task[tasks[index].tasks[key]['input_id']];
           tasks[index].tasks[key]['option']['id'] = task[tasks[index].tasks[key]['input_id']];
         } else {
@@ -92,5 +92,18 @@ export class TaskService {
       tasks.pop(index);
       this.tasks.next(tasks);
     });
+  }
+
+  adjustNewInput(newInput) {
+    const newTask = {
+      id: 0,
+      input: newInput,
+      value: newInput.value
+    };
+    const tasks = this.tasks.getValue();
+    for (let row of tasks) {
+      row['tasks'].push(newTask);
+    }
+    this.tasks.next(tasks);
   }
 }
